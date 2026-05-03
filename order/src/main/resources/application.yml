@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: order
+
+  mongodb:
+    host: ${DATABASE_HOST}
+    port: ${DATABASE_PORT}
+    database: ${DATABASE_NAME}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH_URL}
+
+kafka:
+  url: ${KAFKA_URL}
+  topic: notification-topic
+
+server:
+  port: 8081

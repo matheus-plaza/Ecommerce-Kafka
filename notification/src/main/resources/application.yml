@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: notification
+
+  mongodb:
+    host: ${DATABASE_HOST}
+    port: ${DATABASE_PORT}
+    database: ${DATABASE_NAME}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH_URL}
+
+kafka:
+  url: ${KAFKA_URL}
+  topic: notification-topic
+  group: notification-group
+
+server:
+  port: 8082
