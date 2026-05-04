@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-@Document(collation = "orders")
+@Document(collection = "orders")
 public class Order {
 
     @Id
