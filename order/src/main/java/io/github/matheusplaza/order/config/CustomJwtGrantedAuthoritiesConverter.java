@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class CustomJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
-        Map<String, List<String>> realmAcess = jwt.getClaim("realm_acess");
+        Map<String, List<String>> realmAcess = jwt.getClaim("realm_access");
 
         return realmAcess.get("roles").stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))

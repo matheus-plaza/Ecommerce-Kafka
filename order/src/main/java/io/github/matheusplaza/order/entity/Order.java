@@ -25,4 +25,8 @@ public class Order {
     private PaymentMethod paymentMethod;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public BigDecimal getTotalAmount() {
+        return amount.add(shippingCost);
+    }
 }

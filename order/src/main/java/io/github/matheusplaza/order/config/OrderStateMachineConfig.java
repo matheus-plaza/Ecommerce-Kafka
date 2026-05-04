@@ -2,11 +2,14 @@ package io.github.matheusplaza.order.config;
 
 import io.github.matheusplaza.order.entity.OrderEvent;
 import io.github.matheusplaza.order.entity.OrderStatus;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
-
+@Configuration
+@EnableStateMachine
 public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<OrderStatus, OrderEvent> {
 
     @Override
