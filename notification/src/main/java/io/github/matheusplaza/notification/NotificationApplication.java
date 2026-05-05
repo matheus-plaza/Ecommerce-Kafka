@@ -1,13 +1,13 @@
-package io.github.matheusplaza.norification;
+package io.github.matheusplaza.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NorificationApplication {
+public class NotificationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NorificationApplication.class, args);
+        SpringApplication.run(NotificationApplication.class, args);
     }
 
 }
