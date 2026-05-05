@@ -22,6 +22,8 @@ public class CreateOrderService {
         order.setCreatedAt(LocalDateTime.now());
         order.setUpdatedAt(LocalDateTime.now());
 
+        Order createdOrder = orderRepository.save(order);
+
         notificationProducerService.sendMessage(NotificationMessage
                 .builder()
                 .orderId(order.getId())
@@ -29,6 +31,6 @@ public class CreateOrderService {
                 .orderEvent(OrderEvent.CREATE)
                 .build());
 
-        return orderRepository.save(order);
+        return createdOrder;
     }
 }

@@ -25,12 +25,14 @@ public class UpdateOrderService {
         order.setStatus(orderStateService.processEvent(order.getStatus(), orderEvent));
         order.setUpdatedAt(LocalDateTime.now());
 
+        Order updatedOrder = orderRepository.save(order);
+
         notificationProducerService.sendMessage(NotificationMessage.builder()
                 .orderId(order.getId())
                 .message("Order status updated to " + order.getStatus())
                 .orderEvent(orderEvent)
                 .build());
 
-        return orderRepository.save(order);
+        return updatedOrder;
     }
 }
