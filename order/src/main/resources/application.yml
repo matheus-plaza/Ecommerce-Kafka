@@ -2,10 +2,11 @@ spring:
   application:
     name: order
 
-  mongodb:
-    host: ${DATABASE_HOST}
-    port: ${DATABASE_PORT}
-    database: ${DATABASE_NAME}
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ecommerce
 
   security:
     oauth2:

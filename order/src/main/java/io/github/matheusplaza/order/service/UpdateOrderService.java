@@ -1,8 +1,8 @@
 package io.github.matheusplaza.order.service;
 
-import io.github.matheusplaza.order.controller.request.CreateOrderRequest;
 import io.github.matheusplaza.order.entity.Order;
 import io.github.matheusplaza.order.entity.OrderEvent;
+import io.github.matheusplaza.order.message.NotificationMessage;
 import io.github.matheusplaza.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,7 @@ public class UpdateOrderService {
 
     private final OrderRepository orderRepository;
     private final OrderStateService orderStateService;
+    private final NotificationProducerService notificationProducerService;
     public Order execute(String orderId, OrderEvent orderEvent) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
@@ -24,7 +25,11 @@ public class UpdateOrderService {
         order.setStatus(orderStateService.processEvent(order.getStatus(), orderEvent));
         order.setUpdatedAt(LocalDateTime.now());
 
-        //TODO: Enviar mensagem pro kafka
+        notificationProducerService.sendMessage(NotificationMessage.builder()
+                .orderId(order.getId())
+                .message("Order status updated to " + order.getStatus())
+                .orderEvent(orderEvent)
+                .build());
 
         return orderRepository.save(order);
     }
